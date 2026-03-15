@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Raul × AI Impact Summit — Carousel Decks</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&family=Playfair+Display:wght@700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ig-bg: #0a0a0f;
+    --ig-card: #111118;
+    --ig-accent: #4f7fff;
+    --ig-hot: #ff5f6d;
+    --ig-gold: #f9c846;
+    --ig-text: #f0f0f5;
+    --ig-muted: #888899;
+
+    --li-bg: #f3f2ef;
+    --li-card: #ffffff;
+    --li-navy: #1c3557;
+    --li-blue: #0a66c2;
+    --li-accent: #e8f0ff;
+    --li-text: #1a1a2e;
+    --li-muted: #5e6f8a;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #111118;
+    color: #f0f0f5;
+    min-height: 100vh;
+  }
+
+  /* ── Header ── */
+  .header {
+    text-align: center;
+    padding: 48px 24px 32px;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .header .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: #4f7fff;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .header h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(36px, 6vw, 64px);
+    letter-spacing: 0.04em;
+    line-height: 1;
+    color: #f0f0f5;
+  }
+  .header h1 span { color: #4f7fff; }
+  .header .sub {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #888899;
+    font-weight: 300;
+  }
+
+  /* ── Tab nav ── */
+  .tabs {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    padding: 32px 24px 0;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .tab-btn {
+    flex: 1;
+    max-width: 220px;
+    padding: 12px 20px;
+    border: none;
+    background: rgba(255,255,255,0.04);
+    color: #888899;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+  }
+  .tab-btn:first-child { border-radius: 8px 0 0 8px; }
+  .tab-btn:last-child  { border-radius: 0 8px 8px 0; }
+  .tab-btn.active {
+    background: rgba(79,127,255,0.12);
+    color: #f0f0f5;
+    border-bottom-color: #4f7fff;
+  }
+  .tab-btn:hover:not(.active) { background: rgba(255,255,255,0.07); color: #ccc; }
+
+  /* ── Sections ── */
+  .section { display: none; }
+  .section.active { display: block; }
+
+  /* ══════════════════════════════════════
+     INSTAGRAM SECTION
+  ══════════════════════════════════════ */
+  .ig-section {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 40px 24px 60px;
+  }
+  .ig-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    color: #4f7fff;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .ig-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    letter-spacing: 0.04em;
+    margin-bottom: 4px;
+  }
+  .ig-desc {
+    font-size: 13px;
+    color: #888899;
+    margin-bottom: 32px;
+    font-weight: 300;
+  }
+
+  /* Phone frame */
+  .phone-wrapper {
+    display: flex;
+    align-items: flex-start;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+  .phone-frame {
+    flex-shrink: 0;
+    width: 320px;
+    background: #0d0d14;
+    border-radius: 36px;
+    border: 2px solid rgba(255,255,255,0.12);
+    padding: 16px;
+    box-shadow: 0 0 80px rgba(79,127,255,0.15), 0 40px 80px rgba(0,0,0,0.6);
+    position: relative;
+  }
+  .phone-notch {
+    width: 80px;
+    height: 8px;
+    background: rgba(255,255,255,0.12);
+    border-radius: 10px;
+    margin: 0 auto 12px;
+  }
+
+  /* IG Stories-style top bar */
+  .ig-top-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 4px 10px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    margin-bottom: 10px;
+  }
+  .ig-avatar {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #f9c846, #ff5f6d, #4f7fff);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; font-weight: 700; color: white; flex-shrink: 0;
+  }
+  .ig-handle { font-size: 11px; font-weight: 600; flex: 1; color: #f0f0f5; }
+  .ig-dots { font-size: 16px; color: #888; letter-spacing: 2px; }
+
+  /* Slide area */
+  .slide-area {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+  }
+  .slides-track {
+    display: flex;
+    transition: transform 0.38s cubic-bezier(0.4,0,0.2,1);
+  }
+  .ig-slide {
+    min-width: 100%;
+    aspect-ratio: 1/1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Slide backgrounds */
+  .ig-slide-1 { background: #040408; }
+  .ig-slide-1::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      repeating-linear-gradient(90deg, rgba(79,127,255,0.04) 0 1px, transparent 1px 40px),
+      repeating-linear-gradient(0deg, rgba(79,127,255,0.04) 0 1px, transparent 1px 40px);
+  }
+  .ig-slide-2 { background: #0a0510; }
+  .ig-slide-3 { background: #050d08; }
+  .ig-slide-4 { background: #100508; }
+  .ig-slide-5 { background: #060610; }
+  .ig-slide-6 { background: #0d0804; }
+  .ig-slide-7 { background: #04040a; }
+
+  /* Slide number badge */
+  .slide-num {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 0.1em;
+  }
+
+  /* Big decorative number */
+  .deco-num {
+    position: absolute;
+    top: -10px;
+    left: -8px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 160px;
+    line-height: 1;
+    opacity: 0.04;
+    color: white;
+    pointer-events: none;
+    letter-spacing: -0.02em;
+  }
+
+  /* Tag chip */
+  .slide-tag {
+    display: inline-block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    width: fit-content;
+  }
+  .tag-blue { background: rgba(79,127,255,0.18); color: #7aa8ff; border: 1px solid rgba(79,127,255,0.3); }
+  .tag-red  { background: rgba(255,95,109,0.18);  color: #ff8a95; border: 1px solid rgba(255,95,109,0.3); }
+  .tag-gold { background: rgba(249,200,70,0.15);  color: #f9c846; border: 1px solid rgba(249,200,70,0.3); }
+  .tag-green{ background: rgba(50,200,120,0.15);  color: #50c888; border: 1px solid rgba(50,200,120,0.3); }
+
+  .slide-headline {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px;
+    line-height: 1.05;
+    letter-spacing: 0.02em;
+    color: #f0f0f5;
+    margin-bottom: 8px;
+    position: relative;
+    z-index: 1;
+  }
+  .slide-headline em { font-style: normal; color: #4f7fff; }
+  .slide-headline .hot { color: #ff5f6d; }
+  .slide-headline .gold { color: #f9c846; }
+  .slide-headline .green { color: #50c888; }
+
+  .slide-sub {
+    font-size: 11px;
+    font-weight: 300;
+    color: rgba(240,240,245,0.55);
+    line-height: 1.5;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Swipe dots */
+  .slide-dots {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    margin: 10px 0 4px;
+  }
+  .dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.2);
+    transition: all 0.3s;
+    cursor: pointer;
+  }
+  .dot.active { background: #4f7fff; width: 14px; border-radius: 3px; }
+
+  /* Nav arrows on phone */
+  .slide-nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 4px;
+    margin-top: 4px;
+  }
+  .nav-btn {
+    background: rgba(255,255,255,0.08);
+    border: none;
+    color: #f0f0f5;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .nav-btn:hover { background: rgba(79,127,255,0.25); }
+  .nav-btn:disabled { opacity: 0.2; cursor: default; }
+
+  /* Caption panel */
+  .caption-panel {
+    flex: 1;
+    min-width: 260px;
+  }
+  .caption-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #4f7fff;
+    margin-bottom: 12px;
+  }
+  .caption-box {
+    background: #111118;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: 24px;
+  }
+  .caption-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .caption-avatar {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #f9c846, #ff5f6d, #4f7fff);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700; color: white;
+    flex-shrink: 0;
+  }
+  .caption-handle-wrap { flex: 1; }
+  .caption-handle { font-size: 13px; font-weight: 600; color: #f0f0f5; }
+  .caption-name { font-size: 11px; color: #888899; }
+  .caption-text {
+    font-size: 13px;
+    line-height: 1.85;
+    color: #ccc;
+    white-space: pre-wrap;
+    font-weight: 300;
+  }
+  .caption-text .bold { font-weight: 600; color: #f0f0f5; }
+  .caption-hashtags {
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    font-size: 12px;
+    color: #4f7fff;
+    line-height: 2;
+    font-weight: 300;
+  }
+  .caption-note {
+    margin-top: 20px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: #444455;
+    line-height: 1.7;
+  }
+
+  /* ══════════════════════════════════════
+     LINKEDIN SECTION
+  ══════════════════════════════════════ */
+  .li-section {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 40px 24px 60px;
+    color: #1a1a2e;
+  }
+  .li-section .ig-label { color: #0a66c2; }
+  .li-section .ig-title { color: #f0f0f5; }
+  .li-section .ig-desc  { color: #888899; }
+
+  /* Desktop browser frame */
+  .browser-frame {
+    background: #1e1e26;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1.5px solid rgba(255,255,255,0.08);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  }
+  .browser-bar {
+    background: #16161d;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .b-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .b-red { background: #ff5f56; }
+  .b-yellow { background: #ffbd2e; }
+  .b-green { background: #27c93f; }
+  .b-url {
+    flex: 1;
+    background: rgba(255,255,255,0.06);
+    border-radius: 6px;
+    padding: 4px 12px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: #888899;
+    margin-left: 8px;
+  }
+
+  /* LinkedIn feed wrapper */
+  .li-feed {
+    background: #f3f2ef;
+    padding: 20px;
+    min-height: 500px;
+  }
+  .li-post-card {
+    background: white;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    overflow: hidden;
+    max-width: 560px;
+    margin: 0 auto;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+  .li-post-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 16px 10px;
+  }
+  .li-avatar {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #1c3557, #0a66c2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 700; color: white;
+    flex-shrink: 0;
+  }
+  .li-name { font-size: 14px; font-weight: 600; color: #1a1a2e; }
+  .li-title { font-size: 12px; color: #5e6f8a; }
+  .li-time { font-size: 11px; color: #aaa; }
+  .li-globe { font-size: 10px; color: #aaa; }
+
+  /* LinkedIn carousel slides */
+  .li-slide-area { position: relative; overflow: hidden; }
+  .li-slides-track {
+    display: flex;
+    transition: transform 0.38s cubic-bezier(0.4,0,0.2,1);
+  }
+  .li-slide {
+    min-width: 100%;
+    aspect-ratio: 1/1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 28px 32px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* LinkedIn slide backgrounds */
+  .li-slide-1 { background: #1c3557; }
+  .li-slide-2 { background: #f8f9fc; }
+  .li-slide-3 { background: #eef3ff; }
+  .li-slide-4 { background: #0a1929; }
+  .li-slide-5 { background: #fff7ed; }
+  .li-slide-6 { background: #f0fdf4; }
+  .li-slide-7 { background: #fff8f0; }
+  .li-slide-8 { background: #1c3557; }
+
+  .li-slide-num {
+    position: absolute;
+    top: 14px;
+    right: 16px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: rgba(0,0,0,0.2);
+  }
+  .li-slide-1 .li-slide-num,
+  .li-slide-4 .li-slide-num,
+  .li-slide-8 .li-slide-num { color: rgba(255,255,255,0.25); }
+
+  .li-logo-mark {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+  }
+  .logo-dark { background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.7); }
+  .logo-navy { background: rgba(28,53,87,0.1); color: #1c3557; }
+  .logo-blue { background: rgba(10,102,194,0.1); color: #0a66c2; }
+  .logo-green { background: rgba(21,128,61,0.12); color: #15803d; }
+  .logo-amber { background: rgba(180,83,9,0.1); color: #b45309; }
+
+  .li-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    line-height: 1.2;
+    margin-bottom: 12px;
+    color: #f0f0f5;
+  }
+  .li-headline.dark { color: #1a1a2e; }
+  .li-headline.navy { color: #1c3557; }
+
+  .li-body {
+    font-size: 14px;
+    line-height: 1.7;
+    font-weight: 300;
+    color: rgba(255,255,255,0.75);
+  }
+  .li-body.dark { color: #3d4f6d; }
+  .li-body.navy { color: #1c3557; }
+
+  .li-stat {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 72px;
+    line-height: 1;
+    letter-spacing: 0.02em;
+    margin-bottom: 6px;
+  }
+  .li-stat-label { font-size: 13px; font-weight: 400; letter-spacing: 0.02em; }
+
+  .li-quote-mark {
+    font-family: 'Playfair Display', serif;
+    font-size: 80px;
+    line-height: 0.8;
+    opacity: 0.15;
+    position: absolute;
+    top: 20px;
+    left: 24px;
+    pointer-events: none;
+  }
+
+  .li-divider {
+    width: 40px;
+    height: 3px;
+    border-radius: 2px;
+    margin-bottom: 14px;
+  }
+  .div-white { background: rgba(255,255,255,0.4); }
+  .div-navy { background: #1c3557; }
+  .div-blue { background: #0a66c2; }
+  .div-green { background: #15803d; }
+  .div-amber { background: #b45309; }
+
+  .audience-badge {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: 20px;
+    margin-bottom: 14px;
+    display: inline-block;
+  }
+
+  /* LI nav dots */
+  .li-dots-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 12px;
+    border-top: 1px solid #e8e8e8;
+  }
+  .li-dot-group { display: flex; gap: 4px; align-items: center; }
+  .li-dot { width: 5px; height: 5px; border-radius: 50%; background: #ddd; cursor: pointer; transition: all 0.3s; }
+  .li-dot.active { background: #0a66c2; width: 14px; border-radius: 3px; }
+  .li-nav-arrows { display: flex; gap: 6px; }
+  .li-nav-btn {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    border: 1px solid #ddd;
+    background: white;
+    color: #1a1a2e;
+    font-size: 12px;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+  }
+  .li-nav-btn:hover { border-color: #0a66c2; color: #0a66c2; }
+  .li-nav-btn:disabled { opacity: 0.3; cursor: default; }
+
+  /* LI reactions bar */
+  .li-reactions {
+    padding: 8px 16px 6px;
+    border-top: 1px solid #f0f0f0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .li-react-emoji { font-size: 14px; }
+  .li-react-count { font-size: 12px; color: #5e6f8a; }
+
+  /* LI caption */
+  .li-caption-area {
+    margin-top: 32px;
+  }
+  .li-caption-box {
+    background: #111118;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: 28px;
+  }
+  .li-caption-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #0a66c2;
+    margin-bottom: 14px;
+  }
+  .li-caption-text {
+    font-size: 13px;
+    line-height: 1.9;
+    color: #bbb;
+    white-space: pre-wrap;
+    font-weight: 300;
+  }
+  .li-caption-hashtags {
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    font-size: 12px;
+    color: #4a8fff;
+    line-height: 2;
+  }
+
+  /* ── Brief / Creative notes ── */
+  .notes-section {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+  }
+  .notes-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+  .note-card {
+    background: #111118;
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 16px;
+    padding: 22px;
+  }
+  .note-card .note-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .note-card h3 { font-size: 15px; font-weight: 600; margin-bottom: 8px; }
+  .note-card p  { font-size: 12px; color: #888899; line-height: 1.7; font-weight: 300; }
+
+  /* Responsive */
+  @media (max-width: 680px) {
+    .phone-wrapper { flex-direction: column; align-items: center; }
+    .phone-frame { width: 280px; }
+    .caption-panel { min-width: unset; width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="eyebrow">Content Creator Submission · Competition Entry</div>
+  <h1>RAUL × <span>AI</span> IMPACT SUMMIT</h1>
+  <div class="sub">Two carousel posts · Instagram (Video) + LinkedIn (Photo) · February 2026</div>
+</div>
+
+<div class="tabs">
+  <button class="tab-btn active" onclick="switchTab('ig', this)">📱 Instagram Carousel</button>
+  <button class="tab-btn" onclick="switchTab('li', this)">💼 LinkedIn Carousel</button>
+</div>
+
+<!-- ══════════ INSTAGRAM SECTION ══════════ -->
+<div id="ig-section" class="section active">
+  <div class="ig-section">
+    <div class="ig-label">01 · Instagram</div>
+    <div class="ig-title">Video Carousel — 7 Slides</div>
+    <div class="ig-desc">Energetic visual storytelling · Raul's casual, real voice · Scroll-stopping energy</div>
+
+    <div class="phone-wrapper">
+      <!-- Phone Frame -->
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <div class="ig-top-bar">
+          <div class="ig-avatar">RJ</div>
+          <div class="ig-handle">rauljohnaju</div>
+          <div class="ig-dots">•••</div>
+        </div>
+
+        <div class="slide-area">
+          <div class="slides-track" id="ig-track">
+
+            <!-- Slide 1: Hook -->
+            <div class="ig-slide ig-slide-1">
+              <div class="deco-num">1</div>
+              <div class="slide-num">1 / 7</div>
+              <div class="slide-tag tag-blue">AI Impact Summit 2026</div>
+              <div class="slide-headline">My grades <span class="hot">didn't</span> get me here.</div>
+              <div class="slide-sub">Bharat Mandapam, New Delhi · Feb 2026</div>
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="ig-slide ig-slide-2">
+              <div class="deco-num">2</div>
+              <div class="slide-num">2 / 7</div>
+              <div class="slide-tag tag-blue">The Room</div>
+              <div class="slide-headline">India's biggest <em>AI summit.</em><br>At <span class="gold">16.</span><br>With the UN in the room.</div>
+              <div class="slide-sub">Heads of state. Ministers. Tech CEOs. And me.</div>
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="ig-slide ig-slide-3">
+              <div class="deco-num">3</div>
+              <div class="slide-num">3 / 7</div>
+              <div class="slide-tag tag-green">The Moment</div>
+              <div class="slide-headline">They introduced me to the<br><span class="green">UN Secretary-</span><br><span class="green">General.</span></div>
+              <div class="slide-sub">António Guterres. In person. Actual.</div>
+            </div>
+
+            <!-- Slide 4 -->
+            <div class="ig-slide ig-slide-4">
+              <div class="deco-num">4</div>
+              <div class="slide-num">4 / 7</div>
+              <div class="slide-tag tag-red">Real talk</div>
+              <div class="slide-headline">I said <span class="hot">"Hi".</span><br>That was it.<br>That was all I had.</div>
+              <div class="slide-sub">Still in shock. Still processing. Probably always will be.</div>
+            </div>
+
+            <!-- Slide 5 -->
+            <div class="ig-slide ig-slide-5">
+              <div class="deco-num">5</div>
+              <div class="slide-num">5 / 7</div>
+              <div class="slide-tag tag-blue">Oh and also—</div>
+              <div class="slide-headline"><em>Opening address.</em><br>UN panel.<br>AI + kids' safety.</div>
+              <div class="slide-sub">Casual. No big deal. (It's a very big deal.)</div>
+            </div>
+
+            <!-- Slide 6 -->
+            <div class="ig-slide ig-slide-6">
+              <div class="deco-num">6</div>
+              <div class="slide-num">6 / 7</div>
+              <div class="slide-tag tag-gold">The juggle</div>
+              <div class="slide-headline">School finals.<br>My <span class="gold">startup.</span><br>150,000 students.<br>This summit.</div>
+              <div class="slide-sub">All at the same time. I'm fine. Totally fine.</div>
+            </div>
+
+            <!-- Slide 7: CTA -->
+            <div class="ig-slide ig-slide-7">
+              <div class="deco-num">7</div>
+              <div class="slide-num">7 / 7</div>
+              <div class="slide-tag tag-blue">Still processing</div>
+              <div class="slide-headline">Still can't believe<br>this is <span class="gold">my</span> life.</div>
+              <div class="slide-sub">Full vlog dropping soon. Drop a ❤️ if you want the full story.</div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="slide-dots" id="ig-dots">
+          <div class="dot active" onclick="goToSlide('ig', 0)"></div>
+          <div class="dot" onclick="goToSlide('ig', 1)"></div>
+          <div class="dot" onclick="goToSlide('ig', 2)"></div>
+          <div class="dot" onclick="goToSlide('ig', 3)"></div>
+          <div class="dot" onclick="goToSlide('ig', 4)"></div>
+          <div class="dot" onclick="goToSlide('ig', 5)"></div>
+          <div class="dot" onclick="goToSlide('ig', 6)"></div>
+        </div>
+
+        <div class="slide-nav">
+          <button class="nav-btn" id="ig-prev" onclick="prevSlide('ig')" disabled>←</button>
+          <button class="nav-btn" id="ig-next" onclick="nextSlide('ig')">→</button>
+        </div>
+      </div>
+
+      <!-- Caption Panel -->
+      <div class="caption-panel">
+        <div class="caption-label">✦ Instagram Caption</div>
+        <div class="caption-box">
+          <div class="caption-header">
+            <div class="caption-avatar">RJ</div>
+            <div class="caption-handle-wrap">
+              <div class="caption-handle">rauljohnaju</div>
+              <div class="caption-name">Raul John Aju · AI Kid of India</div>
+            </div>
+          </div>
+          <div class="caption-text">Okay wait.
+
+I got invited to India's biggest AI summit.
+
+At 16.
+
+With the actual UN in the room.
+
+My grades definitely did not get me this invite 😭
+
+I gave the opening address at a UN panel on AI and children's safety. Met the UN Secretary-General. Talked to ministers, global founders, and people I've only ever seen on LinkedIn.
+
+Then came home and remembered I have a math exam next week.
+
+This is my life now apparently. I'm still processing.
+
+I genuinely do not deserve these people.
+
+Drop a ❤️ if you want to see what I learned in there. Full vlog coming soon.</div>
+          <div class="caption-hashtags">#AIKidOfIndia #AIImpactSummit #16YearOld #GenZFounder #AIForGood #India #YoungEntrepreneur #AIRealm</div>
+          <div class="caption-note">
+            ↳ Design note: Slides use high-contrast type on pure dark BGs for Story-forward look.<br>
+            ↳ Each slide designed for screen-record / video carousel format (swipe = cut).<br>
+            ↳ Voice reference: casual, self-deprecating, punchy line breaks throughout.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ LINKEDIN SECTION ══════════ -->
+<div id="li-section" class="section">
+  <div class="ig-section li-section">
+    <div class="ig-label">02 · LinkedIn</div>
+    <div class="ig-title">Photo Carousel — 8 Slides</div>
+    <div class="ig-desc">Professional but personal · Text overlays for founders & educators · Insight-driven storytelling</div>
+
+    <div class="browser-frame">
+      <div class="browser-bar">
+        <div class="b-dot b-red"></div>
+        <div class="b-dot b-yellow"></div>
+        <div class="b-dot b-green"></div>
+        <div class="b-url">linkedin.com/in/rauljohnaju</div>
+      </div>
+      <div class="li-feed">
+        <div class="li-post-card">
+          <div class="li-post-header">
+            <div class="li-avatar">RJ</div>
+            <div style="flex:1">
+              <div class="li-name">Raul John Aju</div>
+              <div class="li-title">Founder, AI Realm Technologies · AI Kid of India</div>
+              <div class="li-time">1d · <span class="li-globe">🌐</span></div>
+            </div>
+          </div>
+
+          <!-- Slide text preview above carousel -->
+          <div style="padding: 0 16px 12px; font-size: 13px; color: #2d3a4a; line-height: 1.65;">
+            I'm 16. Last week I stood in a room with the UN Secretary-General and delivered a speech on AI and children's safety. Here's what I learned — and why it matters for every founder and educator in my network.
+          </div>
+
+          <div class="li-slide-area">
+            <div class="li-slides-track" id="li-track">
+
+              <!-- Slide 1: Cover -->
+              <div class="li-slide li-slide-1">
+                <div class="li-slide-num" style="color:rgba(255,255,255,0.25)">1 / 8</div>
+                <div class="li-logo-mark logo-dark">AI Impact Summit 2026</div>
+                <div class="li-divider div-white"></div>
+                <div class="li-headline" style="font-size:30px; color:#f0f0f5;">What a 16-year-old learned at India's biggest AI summit.</div>
+                <div class="li-body" style="margin-top:12px;">For founders. For educators. For anyone building with AI.</div>
+              </div>
+
+              <!-- Slide 2: The Room -->
+              <div class="li-slide li-slide-2">
+                <div class="li-slide-num" style="color:rgba(0,0,0,0.15)">2 / 8</div>
+                <div class="li-logo-mark logo-navy">The Room</div>
+                <div class="li-divider div-navy"></div>
+                <div class="li-headline dark" style="font-size:24px;">The room had UN leaders, global ministers, and Fortune 500 CEOs.</div>
+                <div class="li-body dark" style="margin-top:10px;">And me. A 16-year-old from Kochi, Kerala — managing school exams and a startup at the same time.</div>
+                <div style="margin-top: 16px; font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #b0b8c8; letter-spacing: 0.1em;">Bharat Mandapam · New Delhi · Feb 2026</div>
+              </div>
+
+              <!-- Slide 3: Insight 1 -->
+              <div class="li-slide li-slide-3">
+                <div class="li-slide-num" style="color:rgba(0,0,0,0.12)">3 / 8</div>
+                <div style="position:absolute; top:16px; left:24px; font-family:'Playfair Display',serif; font-size:90px; line-height:1; color: rgba(10,102,194,0.08); pointer-events:none;">"</div>
+                <div class="li-logo-mark logo-blue">Insight 01</div>
+                <div class="li-divider div-blue"></div>
+                <div class="li-headline navy" style="font-size:24px;">"The most important skill in the world of AI is to be as human as possible."</div>
+                <div class="li-body dark" style="margin-top:10px;">Not prompting. Not coding. Not data. Human judgment. Empathy. Context. That's the moat.</div>
+              </div>
+
+              <!-- Slide 4: Insight 2 -->
+              <div class="li-slide li-slide-4">
+                <div class="li-slide-num" style="color:rgba(255,255,255,0.2)">4 / 8</div>
+                <div class="li-logo-mark logo-dark">Insight 02</div>
+                <div class="li-divider div-white"></div>
+                <div class="li-stat" style="color:#4f7fff;">India</div>
+                <div class="li-headline" style="font-size:22px; color:#f0f0f5;">doesn't just need to<br>adopt AI — it needs<br>to lead it.</div>
+                <div class="li-body" style="margin-top:10px;">The summit made this clear: the window to define AI's global direction is open right now. India's playing in it.</div>
+              </div>
+
+              <!-- Slide 5: Insight 3 -->
+              <div class="li-slide li-slide-5">
+                <div class="li-slide-num" style="color:rgba(0,0,0,0.12)">5 / 8</div>
+                <div class="li-logo-mark logo-amber">Insight 03</div>
+                <div class="li-divider div-amber"></div>
+                <div class="li-headline navy" style="font-size:24px; color:#7c2d12;">AI can be misused. But so can everything.</div>
+                <div class="li-body dark" style="margin-top:10px; color:#7c3a00;">The real question isn't "is AI dangerous?" — it's "who's teaching the next generation to use it right?" That's the urgent problem.</div>
+              </div>
+
+              <!-- Slide 6: For Educators -->
+              <div class="li-slide li-slide-6">
+                <div class="li-slide-num" style="color:rgba(0,0,0,0.12)">6 / 8</div>
+                <div class="audience-badge" style="background:rgba(21,128,61,0.12); color:#15803d;">For Educators</div>
+                <div class="li-divider div-green"></div>
+                <div class="li-headline" style="font-size:24px; color:#14532d;">Your students are already using AI.</div>
+                <div class="li-body dark" style="margin-top:10px; color:#166534;">The question isn't whether to teach it. It's whether you'll guide them — before the algorithm does it for you. Start now. Not next semester.</div>
+              </div>
+
+              <!-- Slide 7: For Founders -->
+              <div class="li-slide li-slide-7">
+                <div class="li-slide-num" style="color:rgba(0,0,0,0.12)">7 / 8</div>
+                <div class="audience-badge" style="background:rgba(180,83,9,0.1); color:#b45309;">For Founders</div>
+                <div class="li-divider div-amber"></div>
+                <div class="li-headline" style="font-size:24px; color:#7c2d12;">The best AI doesn't replace people.</div>
+                <div class="li-body dark" style="margin-top:10px; color:#92400e;">It makes people more powerful. Build tools that amplify human capability — not ones that make humans irrelevant. That's the product that survives.</div>
+              </div>
+
+              <!-- Slide 8: CTA -->
+              <div class="li-slide li-slide-8">
+                <div class="li-slide-num" style="color:rgba(255,255,255,0.2)">8 / 8</div>
+                <div class="li-logo-mark logo-dark">AI Realm Technologies</div>
+                <div class="li-divider div-white"></div>
+                <div class="li-headline" style="font-size:22px; color:#f0f0f5;">I'm 16. I train students, advise governments, and build AI tools.</div>
+                <div class="li-body" style="margin-top:10px;">If I can figure this out, so can you. What's one thing stopping you from using AI to solve a real problem? Drop it in the comments. 👇</div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="li-dots-row">
+            <div class="li-dot-group" id="li-dots">
+              <div class="li-dot active" onclick="goToSlide('li', 0)"></div>
+              <div class="li-dot" onclick="goToSlide('li', 1)"></div>
+              <div class="li-dot" onclick="goToSlide('li', 2)"></div>
+              <div class="li-dot" onclick="goToSlide('li', 3)"></div>
+              <div class="li-dot" onclick="goToSlide('li', 4)"></div>
+              <div class="li-dot" onclick="goToSlide('li', 5)"></div>
+              <div class="li-dot" onclick="goToSlide('li', 6)"></div>
+              <div class="li-dot" onclick="goToSlide('li', 7)"></div>
+            </div>
+            <div class="li-nav-arrows">
+              <button class="li-nav-btn" id="li-prev" onclick="prevSlide('li')" disabled>←</button>
+              <button class="li-nav-btn" id="li-next" onclick="nextSlide('li')">→</button>
+            </div>
+          </div>
+
+          <div class="li-reactions">
+            <span class="li-react-emoji">👍</span>
+            <span class="li-react-emoji">🙌</span>
+            <span class="li-react-emoji">💡</span>
+            <span class="li-react-count">847 reactions · 62 comments · 203 reposts</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LinkedIn Caption -->
+    <div class="li-caption-area">
+      <div class="li-caption-label">✦ LinkedIn Caption</div>
+      <div class="li-caption-box">
+        <div class="li-caption-text">I'm 16 years old.
+
+Last week, I stood in a room with the UN Secretary-General, global ministers, and some of the sharpest minds in AI.
+
+I didn't get there through perfect grades.
+I got there by building things and not waiting for permission.
+
+At the AI Impact Summit 2026, I delivered the opening address at a UN panel on AI and children's safety. I trained my first students at 14. I've built over 10 AI tools. I've advised the Kerala and Dubai governments.
+
+I'm still in school.
+
+Here's the thing — the world doesn't wait for you to be ready. And AI definitely won't.
+
+Swipe through for the 3 biggest things I took away from the summit.
+
+Whether you're a founder, an educator, or just someone figuring out where to start — one of these slides is for you.
+
+What's one thing holding you back from integrating AI into what you do? I'd genuinely love to know. 👇</div>
+        <div class="li-caption-hashtags">#AIImpactSummit #AIKidOfIndia #AIForGood #YoungFounders #EdTech #FutureOfWork #India #ArtificialIntelligence #Leadership #Innovation</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════ CREATIVE NOTES ══════════ -->
+<div class="notes-section">
+  <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.18em; text-transform:uppercase; color:#4f7fff; margin-bottom:16px;">✦ Creative Rationale</div>
+  <div class="notes-grid">
+    <div class="note-card">
+      <div class="note-label" style="color:#ff5f6d;">Instagram Strategy</div>
+      <h3>Emotion before information</h3>
+      <p>Each slide uses one punchy line designed to stop the thumb mid-scroll. Self-deprecating opener mirrors Raul's real voice — grades, shock, disbelief. The "juggle" slide makes him relatable, not braggy.</p>
+    </div>
+    <div class="note-card">
+      <div class="note-label" style="color:#0a66c2;">LinkedIn Strategy</div>
+      <h3>Credibility through vulnerability</h3>
+      <p>Opens with proof, not résumé. Segmented slides (Founders vs Educators) make it immediately useful. Ends with a question — the highest-performing LI post ending. Insights are Raul's actual quotes from the summit.</p>
+    </div>
+    <div class="note-card">
+      <div class="note-label" style="color:#f9c846;">Voice Consistency</div>
+      <h3>Written as Raul, not about him</h3>
+      <p>"My grades didn't get me here." / "I said Hi. That was it." / "This is my life now apparently." — every line references his own quote patterns. Short. Punchy. Never corporate. Never humble-braggy.</p>
+    </div>
+    <div class="note-card">
+      <div class="note-label" style="color:#50c888;">Platform Fit</div>
+      <h3>Two different worlds, same story</h3>
+      <p>IG: dark, cinematic, energetic — built for Gen Z scrollers. LinkedIn: editorial, clean, insight-forward — built for founders and educators making decisions. Same human, different masks.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  const state = { ig: 0, li: 0 };
+  const totals = { ig: 7, li: 8 };
+
+  function updateCarousel(type) {
+    const idx = state[type];
+    const track = document.getElementById(type + '-track');
+    track.style.transform = `translateX(-${idx * 100}%)`;
+    const dots = document.querySelectorAll(`#${type}-dots .${type === 'ig' ? 'dot' : 'li-dot'}`);
+    dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+    document.getElementById(type + '-prev').disabled = idx === 0;
+    document.getElementById(type + '-next').disabled = idx === totals[type] - 1;
+  }
+
+  function nextSlide(type) {
+    if (state[type] < totals[type] - 1) { state[type]++; updateCarousel(type); }
+  }
+  function prevSlide(type) {
+    if (state[type] > 0) { state[type]--; updateCarousel(type); }
+  }
+  function goToSlide(type, idx) {
+    state[type] = idx; updateCarousel(type);
+  }
+
+  function switchTab(tab, btn) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(tab + '-section').classList.add('active');
+  }
+
+  // Keyboard nav
+  document.addEventListener('keydown', e => {
+    const active = document.querySelector('.section.active').id === 'ig-section' ? 'ig' : 'li';
+    if (e.key === 'ArrowRight') nextSlide(active);
+    if (e.key === 'ArrowLeft')  prevSlide(active);
+  });
+</script>
+</body>
+</html>
